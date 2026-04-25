@@ -1,5 +1,5 @@
 import { Controller, Get, Query, UseGuards, Res } from '@nestjs/common';
-import { Response } from 'express';
+import type { Response } from 'express';
 import { ReportsService } from './reports.service';
 import { ReportQueryDto, TrendQueryDto } from './dto/report-query.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';

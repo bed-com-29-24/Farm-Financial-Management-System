@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Transaction } from './transaction.entity';
-import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { UpdateTransactionDto } from './dto/update-transaction.dto';
+import { Transaction } from './entities/transaction.entity';
+import { CreateTransactionDto } from './dto/create-transactions.dto';
+import { UpdateTransactionDto } from './dto/update-transactions.dto';
+import { TransactionQueryDto } from './dto/transaction-query.dto';
 
 @Injectable()
 export class TransactionsService {
@@ -69,7 +70,6 @@ export class TransactionsService {
   async findOne(farmerId: number, id: number): Promise<Transaction> {
     const transaction = await this.transactionsRepo.findOne({
       where: { transactionId: id, farmer: { farmerId } },
-      relations: ['category'],
     });
     if (!transaction) throw new NotFoundException(`Transaction ${id} not found`);
     return transaction;

@@ -3,19 +3,19 @@ import { Transform } from 'class-transformer';
 
 export class CreateTransactionDto {
   @IsIn(['income', 'expense'])
-  type: 'income' | 'expense';
+  type!: 'income' | 'expense';
 
   @IsInt()
   @IsPositive()
-  category_id: number;
+  category_id!: number;
 
   @IsNumber()
   @IsPositive()
   @Transform(({ value }) => parseFloat(value))
-  amount: number;
+  amount!: number;
 
   @IsDateString()
-  transaction_date: string;
+  transaction_date!: string;
 
   @IsOptional()
   @IsString()

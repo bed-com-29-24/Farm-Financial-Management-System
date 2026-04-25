@@ -1,7 +1,8 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
-import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { UpdateTransactionDto } from './dto/update-transaction.dto';
+import { CreateTransactionDto } from './dto/create-transactions.dto';
+import { UpdateTransactionDto } from './dto/update-transactions.dto';
+import { TransactionQueryDto } from './dto/transaction-query.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CurrentFarmer } from '../common/decorators/current-farmer.decorator';
 
