@@ -54,3 +54,31 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Editor swap files
+*.swp
+*.swo
+*~
+
+# Windows thumbnail cache
+Thumbs.db
+ehthumbs.db
+
+# ESLint cache
+.eslintcache
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Package manager lock files (if not committing)
+package-lock.json
+pnpm-lock.yaml
+
+# Build and cache directories
+.turbo/
+.cache/
+
+# macOS additional
+.AppleDouble
+.LSOverride
+._*
