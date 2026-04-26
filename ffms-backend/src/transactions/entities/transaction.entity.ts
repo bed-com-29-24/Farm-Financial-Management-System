@@ -1,6 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+} from 'typeorm';
 import { Farmer } from '../../farmers/entities/farmers.entity';
-import { Categories } from '../../categories/entities/categories.entity';
+import { Category } from '../../categories/entities/category.entity';
 
 @Entity({ name: 'FFMS_TRANSACTIONS' })
 export class Transaction {
@@ -11,9 +18,9 @@ export class Transaction {
   @JoinColumn({ name: 'FARMER_ID' })
   farmer: Farmer;
 
-  @ManyToOne(() => Categories, { eager: true })
+  @ManyToOne(() => Category, { eager: true })
   @JoinColumn({ name: 'CATEGORY_ID' })
-  category: Categories;
+  category: Category;
 
   @Column({ name: 'TYPE', length: 10 })
   type: 'income' | 'expense';
@@ -29,5 +36,4 @@ export class Transaction {
 
   @CreateDateColumn({ name: 'CREATED_AT' })
   createdAt: Date;
-
 }
