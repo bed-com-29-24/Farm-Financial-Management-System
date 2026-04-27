@@ -16,7 +16,7 @@ export class CategoriesService {
     @InjectRepository(Category)
     private categoryRepo: Repository<Category>,
 
-    @InjectRepository(Transaction) // ← add this
+    @InjectRepository(Transaction)
     private transactionRepo: Repository<Transaction>,
   ) {}
 
@@ -51,7 +51,6 @@ export class CategoriesService {
       throw new ForbiddenException('System categories cannot be deleted');
     }
 
-    // ← add this check before deleting
     const inUse = await this.transactionRepo.count({
       where: { category: { categoryId: id } },
     });

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CategoriesService } from './categories.service';
-import { Category } from './entities/category.entity'; // Singular
+import { Category } from './entities/category.entity';
 import { Repository } from 'typeorm';
 import { ForbiddenException } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create.category.dto';
@@ -13,7 +13,7 @@ describe('CategoriesService', () => {
 
   const mockCategory: Category = {
     categoryId: 1,
-    name: 'Food', // Updated from categoryName to name
+    name: 'Food',
     type: 'expense',
     isSystem: 0,
     createdAt: new Date(),
