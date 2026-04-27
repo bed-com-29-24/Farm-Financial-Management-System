@@ -6,7 +6,7 @@ import {
   JoinColumn,
   CreateDateColumn,
 } from 'typeorm';
-import { Farmer } from '../../farmers/entities/farmers.entity';
+import { Farmer } from '../../farmers/entities/farmer.entity';
 import { Category } from '../../categories/entities/category.entity';
 
 @Entity({ name: 'FFMS_TRANSACTIONS' })
