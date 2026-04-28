@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Farmer } from './entities/farmer.entity';
@@ -26,6 +26,12 @@ export class FarmersService {
     return this.farmersRepo.findOne({
       where: { farmerId: id },
     });
+  }
+
+  async findById(id: number): Promise<Farmer> {
+    const farmer = await this.findOne(id);
+    if (!farmer) throw new NotFoundException(`Farmer ${id} not found`);
+    return farmer;
   }
 
   // UPDATE
