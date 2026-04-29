@@ -1,28 +1,34 @@
-import { IsString, IsNotEmpty, IsEmail, IsPhoneNumber } from 'class-validator';
+import {
+  IsString,
+  IsNotEmpty,
+  IsEmail,
+  IsOptional,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class CreateFarmerDto {
   @IsString()
   @IsNotEmpty()
-  firstName: string;
-
-  @IsString()
-  @IsNotEmpty()
-  lastName: string;
+  @MaxLength(255)
+  fullName: string;
 
   @IsEmail()
+  @MaxLength(255)
   email: string;
 
-  @IsPhoneNumber()
-  phoneNumber: string;
+  @IsOptional()
+  @MaxLength(20)
+  phoneNumber?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  farmName?: string;
 
   @IsString()
   @IsNotEmpty()
-  farmName: string;
-
-  @IsString()
-  @IsNotEmpty()
+  @MinLength(8)
+  @MaxLength(255)
   password: string;
-
-  @IsString()
-  role: string;
 }

@@ -2,10 +2,12 @@ import {
   Injectable,
   ForbiddenException,
   NotFoundException,
+  ConflictException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Category } from './entities/category.entity';
+import { Transaction } from '../transactions/entities/transaction.entity';
 import { CreateCategoryDto } from './dto/create.category.dto';
 
 @Injectable()
@@ -13,6 +15,9 @@ export class CategoriesService {
   constructor(
     @InjectRepository(Category)
     private categoryRepo: Repository<Category>,
+
+    @InjectRepository(Transaction)
+    private transactionRepo: Repository<Transaction>,
   ) {}
 
   async create(data: CreateCategoryDto): Promise<Category> {
@@ -45,6 +50,16 @@ export class CategoriesService {
     if (category.isSystem === 1) {
       throw new ForbiddenException('System categories cannot be deleted');
     }
+
+    const inUse = await this.transactionRepo.count({
+      where: { category: { categoryId: id } },
+    });
+    if (inUse > 0) {
+      throw new ConflictException(
+        'Category is referenced by existing transactions.',
+      );
+    }
+
     await this.categoryRepo.delete(id);
   }
 }

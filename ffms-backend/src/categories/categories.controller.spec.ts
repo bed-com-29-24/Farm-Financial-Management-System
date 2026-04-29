@@ -8,7 +8,6 @@ describe('CategoriesController', () => {
   let controller: CategoriesController;
   let service : any;
 
-  // 1. Mock the Service methods
   const mockCategoriesService = {
     create: jest.fn(),
     findAll: jest.fn(),

@@ -1,45 +1,50 @@
 import {
   Controller,
   Get,
-  Post,
   Put,
   Delete,
   Param,
   Body,
+  UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { FarmersService } from './farmers.service';
+import { UpdateFarmerDto } from './dto/update.farmer.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+@ApiTags('Farmers')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('farmers')
 export class FarmersController {
   constructor(private readonly farmersService: FarmersService) {}
 
-  // CREATE
-  @Post()
-  create(@Body() body) {
-    return this.farmersService.create(body);
-  }
-
   // GET ALL
   @Get()
+  @ApiOperation({ summary: 'Get all farmers (admin only)' })
   findAll() {
     return this.farmersService.findAll();
   }
 
   // GET ONE
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.farmersService.findOne(Number(id));
+  @ApiOperation({ summary: 'Get a single farmer profile' })
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.farmersService.findOne(id);
   }
 
   // UPDATE
   @Put(':id')
-  update(@Param('id') id: string, @Body() body) {
-    return this.farmersService.update(Number(id), body);
+  @ApiOperation({ summary: 'Update farmer profile' })
+  update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFarmerDto) {
+    return this.farmersService.update(id, dto);
   }
 
-  // DELETE (SOFT)
+  // SOFT DELETE
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.farmersService.remove(Number(id));
+  @ApiOperation({ summary: 'Soft delete farmer (admin only)' })
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.farmersService.remove(id);
   }
 }

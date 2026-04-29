@@ -16,9 +16,9 @@ import { UpdateCategoryDto } from './dto/update.category.dto';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@ApiTags('Categories') // Groups these in Swagger UI
+@ApiTags('Categories')
 @ApiBearerAuth() // Shows the Padlock icon in Swagger
-@UseGuards(JwtAuthGuard) // Protects all routes - user must be logged in
+@UseGuards(JwtAuthGuard) // Protects all routes
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
