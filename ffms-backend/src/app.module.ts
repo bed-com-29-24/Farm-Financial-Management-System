@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { FarmersModule } from './farmers/farmers.module';
 import { CategoriesModule } from './categories/categories.module';
 import { AuthModule } from './auth/auth.module';
+import { NotificationsModule } from './notifications/notifications.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { ReportsModule } from './reports/reports.module';
 import { databaseConfig } from './config/database.config';
@@ -22,6 +23,7 @@ import { databaseConfig } from './config/database.config';
     CategoriesModule,
     TransactionsModule,
     ReportsModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
