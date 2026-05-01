@@ -1,7 +1,7 @@
-import { NestFactory }           from '@nestjs/core';
-import { ValidationPipe }        from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppModule }             from './app.module';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,11 +13,13 @@ async function bootstrap() {
   app.enableCors({ origin: process.env.CORS_ORIGIN, credentials: true });
 
   // Global validation pipe — rejects unknown fields, applies class-validator rules
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist:            true,
-    forbidNonWhitelisted: true,
-    transform:            true,   // auto-converts types (string -> number, etc.)
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true, // auto-converts types (string -> number, etc.)
+    }),
+  );
 
   // Swagger API docs (development only)
   if (process.env.NODE_ENV !== 'production') {
@@ -27,7 +29,11 @@ async function bootstrap() {
       .setVersion('1.0')
       .addBearerAuth()
       .build();
-    SwaggerModule.setup('api/docs', app, SwaggerModule.createDocument(app, config));
+    SwaggerModule.setup(
+      'api/docs',
+      app,
+      SwaggerModule.createDocument(app, config),
+    );
   }
 
   await app.listen(process.env.PORT ?? 3000);
