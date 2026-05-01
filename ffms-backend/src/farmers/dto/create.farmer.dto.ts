@@ -5,7 +5,13 @@ import {
   IsOptional,
   MaxLength,
   MinLength,
+  IsEnum,
 } from 'class-validator';
+
+export enum FarmerRole {
+  FARMER = 'farmer',
+  ADMIN = 'admin',
+}
 
 export class CreateFarmerDto {
   @IsString()
@@ -31,4 +37,8 @@ export class CreateFarmerDto {
   @MinLength(8)
   @MaxLength(255)
   password: string;
+
+  @IsOptional()
+  @IsEnum(FarmerRole)
+  role?: FarmerRole;
 }

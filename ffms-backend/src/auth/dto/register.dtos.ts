@@ -1,7 +1,19 @@
-import { IsEmail, IsNotEmpty, MinLength, MaxLength, IsOptional, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  MinLength,
+  MaxLength,
+  IsOptional,
+  IsString,
+  IsEnum,
+} from 'class-validator';
+
+export enum FarmerRole {
+  FARMER = 'farmer',
+  ADMIN = 'admin',
+}
 
 export class RegisterDto {
-
   @IsNotEmpty()
   @MinLength(3)
   @MaxLength(150)
@@ -32,4 +44,8 @@ export class RegisterDto {
   @MinLength(8)
   @MaxLength(64)
   password!: string;
+
+  @IsOptional()
+  @IsEnum(FarmerRole)
+  role?: FarmerRole;
 }
