@@ -1,5 +1,12 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn,} from 'typeorm';
-import { Farmer } from '../../farmers/entities/farmers.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+} from 'typeorm';
+import { Farmer } from '../../farmers/entities/farmer.entity';
 
 @Entity('notifications')
 export class Notification {
