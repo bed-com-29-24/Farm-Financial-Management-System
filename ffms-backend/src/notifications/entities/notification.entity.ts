@@ -1,5 +1,5 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn,} from 'typeorm';
-import { Farmer } from 'src/farmers/entities/farmer.entity';
+import { Farmer } from '../../farmers/entities/farmers.entity';
 
 @Entity('notifications')
 export class Notification {
@@ -21,7 +21,7 @@ export class Notification {
   @CreateDateColumn({ name: 'CREATED_AT' })
   createdAt: Date;
 
-  // 🔗 IMPORTANT RELATION (matches Farmer entity: farmerId)
+  // IMPORTANT RELATION (matches Farmer entity: farmerId)
   @ManyToOne(() => Farmer)
   @JoinColumn({ name: 'FARMER_ID' })
   farmer: Farmer;
