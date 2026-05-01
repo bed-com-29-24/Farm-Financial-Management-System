@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Farmer } from '../farmers/entities/farmers.entity';
+import { Farmer } from 'src/farmers/entities/farmer.entity';
 import { RegisterDto } from './dto/register.dtos';
 import { LoginDto } from './dto/login.dto';
 

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Notification } from './entities/notifications.entity';
 import { CreateNotificationDto } from './dto/create-notification.dto';
-import { Farmer } from '../farmers/entities/farmers.entity';
+import { Farmer } from 'src/farmers/entities/farmer.entity';
 
 @Injectable()
 export class NotificationsService {
