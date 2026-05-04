@@ -72,7 +72,9 @@ export class FarmersService {
   }
 
   // SOFT DELETE
-  async remove(id: number) {
-    return this.farmersRepo.update(id, { isActive: 0 });
+  async remove(id: number): Promise<{message: string}> {
+    await this.findOne(id);
+    await this.farmersRepo.delete(id);
+    return {message: `User with ${id} successfully deleted`};
   }
 }

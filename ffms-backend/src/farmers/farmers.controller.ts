@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Put,
-  Delete,
-  Param,
-  Body,
-  UseGuards,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Controller,Get,Delete,Param,Body,UseGuards,ParseIntPipe,Patch } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { FarmersService } from './farmers.service';
 import { UpdateFarmerDto } from './dto/update.farmer.dto';
@@ -35,14 +26,14 @@ export class FarmersController {
   }
 
   // UPDATE PROFILE
-  @Put(':id')
+  @Patch(':id')
   @ApiOperation({ summary: 'Update farmer profile' })
   update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFarmerDto) {
     return this.farmersService.update(id, dto as any);
   }
 
   // CHANGE PASSWORD
-  @Put(':id/change-password')
+  @Patch(':id/change-password')
   @ApiOperation({ summary: 'Change farmer password' })
   changePassword(
     @Param('id', ParseIntPipe) id: number,
