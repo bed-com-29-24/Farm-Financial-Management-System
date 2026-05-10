@@ -16,22 +16,13 @@ import { databaseConfig } from './config/database.config';
 
 @Module({
   imports: [
-    // =========================
-    // ENV CONFIG (GLOBAL)
-    // =========================
+    
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
     }),
 
-    // =========================
-    // DATABASE CONFIG
-    // =========================
     TypeOrmModule.forRoot(databaseConfig()),
-
-    // =========================
-    // FEATURE MODULES
-    // =========================
     AuthModule,
     FarmersModule,
     CategoriesModule,
