@@ -26,7 +26,7 @@ export class Farmer {
   @Column({ name: 'IS_ACTIVE', default: 1, nullable: false })
   isActive!: number;
 
-  @Column({ name: 'ROLE', length: 50, default: 'farmer', nullable: false })
+  @Column({ name: 'ROLE', length: 50, default: 'admin', nullable: false })
   role!: string;
 
   @Column({
