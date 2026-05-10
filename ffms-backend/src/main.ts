@@ -1,42 +1,35 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Global prefix for all routes
-  // app.setGlobalPrefix('api/v1');
+  // =========================
+  // ENABLE CORS
+  // =========================
+  app.enableCors({
+    origin: '*', // later you can restrict to frontend URL
+    credentials: true,
+  });
 
-  // CORS — allow frontend origin
-  app.enableCors({ origin: process.env.CORS_ORIGIN, credentials: true });
-
-  // Global validation pipe — rejects unknown fields, applies class-validator rules
+  // =========================
+  // GLOBAL VALIDATION PIPE
+  // =========================
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true, // auto-converts types (string -> number, etc.)
+      whitelist: true, // removes extra fields
+      forbidNonWhitelisted: true, // rejects unknown fields
+      transform: true, // auto convert types
     }),
   );
 
-  // Swagger API docs (development only)
-  if (process.env.NODE_ENV !== 'production') {
-    const config = new DocumentBuilder()
-      .setTitle('FFMS API')
-      .setDescription('Farm Financial Management System REST API')
-      .setVersion('1.0')
-      .addBearerAuth()
-      .build();
-    SwaggerModule.setup(
-      'api/docs',
-      app,
-      SwaggerModule.createDocument(app, config),
-    );
-  }
+  // =========================
+  // START SERVER
+  // =========================
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
 
-  await app.listen(process.env.PORT ?? 3000);
-  console.log(`FFMS backend running on port ${process.env.PORT ?? 3000}`);
+  console.log();
 }
 bootstrap();

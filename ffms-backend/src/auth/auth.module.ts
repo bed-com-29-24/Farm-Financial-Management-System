@@ -10,6 +10,7 @@ import { Farmer } from 'src/farmers/entities/farmer.entity';
 
 @Module({
   imports: [
+    ConfigModule,
     TypeOrmModule.forFeature([Farmer]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({

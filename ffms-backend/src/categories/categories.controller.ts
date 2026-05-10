@@ -14,7 +14,7 @@ import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create.category.dto';
 import { UpdateCategoryDto } from './dto/update.category.dto';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('Categories')
 @ApiBearerAuth() // Shows the Padlock icon in Swagger
