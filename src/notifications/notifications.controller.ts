@@ -1,9 +1,10 @@
 
 
-import { Controller, Get, Put, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Put, Param, UseGuards, Post } from '@nestjs/common';
 import { NotificationsService } from './notifications.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CurrentFarmer } from '../common/decorators/current-farmer.decorator';
+import { CreateNotificationDto } from './dto/create-notification.dto';
 
 @Controller('notifications')
 @UseGuards(JwtAuthGuard)
@@ -20,5 +21,9 @@ export class NotificationsController {
   markAsRead(@Param('id') id: number, @CurrentFarmer() farmer: any) {
     return this.service.markAsRead(id, farmer.farmerId);
   }
-  
+   
+  @Post ()
+  create(@CurrentFarmer() farmer: any, dto: CreateNotificationDto) {
+    return this.service.create(farmer.farmerId, dto);
+  }
 }
